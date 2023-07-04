@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: desafio_production
-  username: desafio
+  url: <%= ENV['DATABASE_URL'] %>
+  
   password: <%= ENV["DESAFIO_DATABASE_PASSWORD"] %>
