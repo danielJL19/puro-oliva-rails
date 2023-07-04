@@ -3,5 +3,7 @@ class PagesController < ApplicationController
   end
 
   def nuestrosProductos
+    @products = Product.all
+    
   end
 end
