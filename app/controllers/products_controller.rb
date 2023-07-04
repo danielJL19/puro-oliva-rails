@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  layout "layoutAdmin"
+  before_action :authenticate_user!, except: [:index]
   before_action :set_product, only: %i[ show edit update destroy ]
 
   # GET /products or /products.json
@@ -25,11 +27,11 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
-        format.json { render :show, status: :created, location: @product }
+        format.html { redirect_to dashboard_index_path , notice: "El producto se ha creado exitosamente" }
+
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+
       end
     end
   end
@@ -38,11 +40,11 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
-        format.json { render :show, status: :ok, location: @product }
+        format.html { redirect_to dashboard_index_path , notice: "El producto se ha actualizado" }
+
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+
       end
     end
   end
@@ -52,8 +54,8 @@ class ProductsController < ApplicationController
     @product.destroy
 
     respond_to do |format|
-      format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to dashboard_index_path, notice: "El producto se ha eliminado" }
+
     end
   end
 
@@ -65,6 +67,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :description, :price)
+      params.require(:product).permit(:name, :description, :price, :category_id, :image)
     end
 end

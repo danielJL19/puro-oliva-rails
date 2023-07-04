@@ -1,6 +1,6 @@
 
-  <div class="my-5">
-    <h2>Iniciar sesión</h2>
+  <div class="my-5 flex  md:flex-none items-center justify-center flex-col md:items-start">
+    <h2 class="text-3xl md:text-5x1 font-extrabold dark:text-white">Iniciar sesión</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
@@ -21,7 +21,7 @@
       <% end %>
 
       <div class="actions">
-        <%= f.submit "Log in" %>
+        <%= f.submit "Iniciar sesión", class:"my-3 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" %>
       </div>
     <% end %>
 

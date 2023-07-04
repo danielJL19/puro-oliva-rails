@@ -1,65 +1,67 @@
 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 my-5">
-                    <div class="mb-5">
-                        <a class="rounded-full bg-indigo-500 mb-8 p-3 text-white" href="#">Crear producto</a>
-                        
-                        <%= link_to 'Categorías' , dashboard_categories_path, class:'rounded-full bg-indigo-500 mb-8 p-3 text-white' %>
-                        <a class="rounded-full bg-indigo-500 mb-8 p-3 text-white" href="#">Mensajes</a>
-                    </div>
-                    <!--TABLA PRODUCTOS-->
+      <% if notice.present? %>
+        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+      <% end %>
+  <div class="p-6 text-gray-900 my-5">
+    <div class="mb-5 flex flex-col md:flex-row md:gap-2">
+      <%= link_to "Crear Producto", new_product_path, class:"text-center rounded-full bg-indigo-500 mb-8 p-3 text-white" %>
+      <%= link_to 'Categorías' , dashboard_categories_path, class:'text-center rounded-full bg-indigo-500 mb-8 p-3 text-white' %>
+      <%= link_to "Mensajes", root_path, class:"text-center rounded-full bg-indigo-500 mb-8 p-3 text-white" %>
+    </div>
+    <!--TABLA PRODUCTOS-->
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        Nombre
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Descripción
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Precio
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Category_id
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Action
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        1
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        2
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        3
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        4
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#"
-                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        <a href="#"
-                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    </td>
-                                </tr>
-
-                               
-                                    
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
+          <tr>
+            <th scope="col" class="px-6 py-3">
+              Nombre
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Descripción
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Precio
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Category_id
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Image
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+              <th scope="row"
+                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <%= product.name %>
+              </th>
+              <td class="px-6 py-4">
+                <%= product.description%>
+              </td>
+              <td class="px-6 py-4">
+                $<%= product.price %>
+              </td>
+              <td class="px-6 py-4">
+                <%= product.category_id %>
+              </td>
+              <td class="px-6 py-4">
+                <%= image_tag product.image , width:'200', heigth:"100" %>
+              </td>
+              <td class="px-6 py-4 flex items-center">
+                <%= link_to 'Edit this product', edit_product_path(product), class: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" %>
+                <%= button_to 'Eliminar', product_path(product), method: :delete, class: "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
